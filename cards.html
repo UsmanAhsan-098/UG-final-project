@@ -1,0 +1,52 @@
+<!--  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="cards.css">
+  <title>Flash!</title>
+</head>
+
+<body>
+  <div id="flashcard-app" class="container">
+
+    <h1>Flashcard Web App!</h1>
+
+    <div class="flashcard-form">
+      <label for="front">Question
+        <input v-model.trim="newFront" type="text" id="front">
+      </label>
+      <label for="back">Answer
+        <input  v-model.trim="newBack" type="text" id="back">
+      </label>
+      <button v-on:click="addNew">Add a New Card</button>
+      <span class="error" v-show="error">Please write something</span>
+    </div>
+
+    <ul class="flashcard-list">
+      <li v-for="(card, index) in cards" v-on:click="toggleCard(card)">
+        <transition name="flip">
+          <p class="card" v-if="!card.flipped" >
+            {{card.front}}
+            <span class="delete-card" v-on:click="cards.splice(index, 1)">Delete</span>
+            <span class="edit-card" v-on:click="editCard(card)">Edit</span>
+          </p>
+          <p class="card" v-else >
+            {{card.back}}
+            
+          </p>
+        </transition>
+      </li>
+    </ul>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

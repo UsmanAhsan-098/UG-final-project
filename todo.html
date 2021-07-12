@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+        integrity="undefined" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+ -->
+    <style>
+
+    </style>
+</head>
+
+<body style="background:lightblue">
+    <div id="app" class="container">
+        <h1 class="text-center mt-5">Todo List</h1>
+
+        <div v-if="!isEditing" class="d-flex">
+            <input type="text" v-model="todo" placeholder="Enter Task" class="form-control">
+            <button class="btn btn-primary rounded-0" type="submit" @click="storeTodo"> <i
+                    class="fas fa-plus-square"></i>
+                <!--ADD--> </button>
+        </div>
+        <div v-else>
+            <input type="text" v-model="todo">
+            <button class="btn btn-success rounded-0" type="submit" @click="updateTodo">update </button>
+        </div>
+
+        <table class="table table-bordered bg-white">
+            <tbody v-for="(todo, index) in todos">
+                <tr>
+                    <td v-if="includesdone(todo)">
+                        {{ todo }}
+                    </td>
+
+                    <td v-else style="color: green;">
+                        {{strip(todo)}}
+                    </td>
+
+                    <td width="120">
+                        <button @click="isdonetodo(index,todo)" class="btn btn-success btn-sm rounded-0">
+                        <i class="fas fa-check"></i>                        </button>
+                        <button class="btn btn-warning btn-sm rounded-0" @click="editTodo(index, todo)"><i
+                                class="fas fa-pen"></i>
+                            <!--EDIT--></button>
+                        <button class="btn btn-danger btn-sm rounded-0" @click="removeTodo(index)"><i
+                                class="fas fa-trash"></i>
+                            <!--delete--></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script>
+        new Vue({
+            el: '#app',
+
+            data: {
+                // isDone: false,
+                isEditing: false,
+                todo: '',
+                todos: [],
+                selectedIndex: null
+            },
+
+            methods: {
+                storeTodo() {
+                    if (
+                        this.todo.length > 0
+                    ) {
+                        this.todos.push(this.todo)
+                        this.todo = ''
+                    }
+                },
+
+                strip(todo){
+                    return todo.replace('-done-', '');
+                },
+
+                includesdone(todo) {
+                    if (todo.includes("-done-")) {
+                        return false;
+                    }
+                    else{
+                        return true;
+                    }
+                },
+
+                removeTodo(index) {
+                    this.todos.splice(index, 1)
+                },
+
+                updateTodo() {
+                    this.todos.splice(this.selectedIndex, 1, this.todo)
+                    this.todo = ''
+                    this.isEditing = false
+                },
+
+                editTodo(index, todo) {
+                    this.isEditing = true
+                    this.todo = todo
+                    this.selectedIndex = index
+                },
+
+                isdonetodo(index, todo) {
+                    if (todo.includes("-done-")) {
+                        this.todos.splice(index, 1, todo.replace('-done-', ''));
+                        // this.todos.replace('-done-','');
+                    } else {
+                        this.todos.splice(index, 1, todo + "-done-")
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

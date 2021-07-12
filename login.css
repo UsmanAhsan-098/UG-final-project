@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+.main-page-background {
+  
+  background-color: rgb(255, 247, 175);
+  height: 620px;
+  width: 1340px;
+}
+
+.user-info-component {
+  
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background-color: rgb(255, 255, 255); 
+  position: absolute;
+  text-align: center;
+  top: 80px;
+  left: 350px;
+  width: 670px;
+  height: 500px;
+}
+.login {
+  font-family: sans-serif;
+  font-size: 20px;
+  width: 200px;
+  position: absolute;
+  text-align: center;
+  top: 10px;
+  left: 220px;
+  
+}
+
+.login input {
+  height: 30px;
+  color: black;
+  font-family: sans-serif;
+  font-size: large;
+  width: 200px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 2px solid rgb(5, 39, 133);
+}
+
+
+
+.login button {
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid;
+  height: 70px;
+  background-color: rgb(129, 129, 179);
+  border: none;
+  cursor: pointer;
+  
+  font-family: "Shadows Into Light", cursive;
+  width: 50px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.login button:hover{
+    background-color: greenyellow;
+}
